@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS oauth_access_token (
 );
 
 CREATE TABLE IF NOT EXISTS oauth_refresh_token (
-    token_id          VARCHAR(128) NULL,
+    token_id        VARCHAR(128) NULL,
     -- 
-    token             BLOB NULL,
-    authentication    BLOB NULL
+    token           BLOB NULL,
+    authentication  BLOB NULL
 );
 
 CREATE TABLE IF NOT EXISTS oauth_code (
-    code              VARCHAR(256) NULL,
-    authentication    BLOB NULL
+    code            VARCHAR(256) NULL,
+    authentication  BLOB NULL
 );
 
 CREATE TABLE IF NOT EXISTS oauth_approvals (
