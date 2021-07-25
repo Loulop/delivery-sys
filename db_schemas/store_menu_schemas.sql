@@ -2,13 +2,26 @@
 -- REFERENCES::
 -- 1. https://developer.uber.com/docs/eats/guides/menu-integration
 
+-- Item @@ <-----> @@ Item Tag
 CREATE TABLE IF NOT EXISTS item (
     item_id             VARCHAR(128) NOT NULL,
     -- 
-    -- TODO
     item_type           VARCHAR(16) NULL DEFAULT 'PARENT',      -- parent, null
+    item_status         VARCHAR(16) NOT NULL DEFAULT 'IN_STOCK'     -- out_of_stock, in_stock, back_in_stock
+    -- TODO
+    available_from      TIME NULL,
+    available_to        TIME NULL,
     -- 
     PRIMARY KEY (item_id)
+);
+CREATE TABLE IF NOT EXISTS item_tag (
+    tagname             VARCHAR(128) NOT NULL,
+    -- 
+    PRIMARY KEY (tagname)
+);
+CREATE TABLE IF NOT EXISTS item_tags (
+    tagname             VARCHAR(128) NOT NULL,
+    item_id             VARCHAR(128) NOT NULL,
 );
 
 -- Modifier Group @@ <-----> 1 Parent Item
@@ -50,8 +63,8 @@ CREATE TABLE IF NOT EXISTS menu (
     fulfillment_type    VARCHAR(16) NOT NULL DEFAULT "DELIVERY",      -- delivery, pick-up, all
     -- TODO
     -- 
-    available_from      TIMESTAMP NULL,
-    available_to        TIMESTAMP NULL,
+    available_from      TIME NULL,
+    available_to        TIME NULL,
     -- 
     PRIMARY KEY (menu_id)
 );
