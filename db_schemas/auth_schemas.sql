@@ -6,7 +6,6 @@
 -- 4. https://developers.wultra.com/docs/2019.11/powerauth-webflow/Database-Table-Structure
 -- 5. https://docs.oracle.com/cd/E55956_01/doc.11123/oauth_guide/content/oauth_app_registration.html
 
--- Client details
 CREATE TABLE IF NOT EXISTS oauth_client_details (
     client_id       VARCHAR(128) NOT NULL,
     -- 
@@ -44,15 +43,15 @@ CREATE TABLE IF NOT EXISTS oauth_access_token (
 );
 
 CREATE TABLE IF NOT EXISTS oauth_refresh_token (
-  token_id          VARCHAR(128),
-  -- 
-  token             BLOB,
-  authentication    BLOB
+    token_id          VARCHAR(128) NULL,
+    -- 
+    token             BLOB NULL,
+    authentication    BLOB NULL
 );
 
 CREATE TABLE IF NOT EXISTS oauth_code (
-  code              VARCHAR(256),
-  authentication    BLOB
+    code              VARCHAR(256) NULL,
+    authentication    BLOB NULL
 );
 
 CREATE TABLE IF NOT EXISTS oauth_approvals (
