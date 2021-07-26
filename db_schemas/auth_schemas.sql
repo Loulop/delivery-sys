@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS oauth_access_token (
 CREATE TABLE IF NOT EXISTS oauth_refresh_token (
     token_id            VARCHAR(128) NULL,
     -- 
-    token               BLO B NULL,
+    token               BLOB NULL,
     authentication      BLOB NULL
 );
 
