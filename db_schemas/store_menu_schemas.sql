@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS menu_categories (
 
 -- Service hours @@ <-----> 1 Store
 -- update this table as a cronjob
-CREATE TABLE IF NOT EXISTS service_hours (
+CREATE TABLE IF NOT EXISTS holiday_service_hours (
     service_hours_id            VARCHAR(128) NOT NULL,
     -- 
     menu_id                     VARCHAR(128) NOT NULL,
