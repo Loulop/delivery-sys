@@ -7,15 +7,19 @@ CREATE TABLE IF NOT EXISTS store (
     --
     user_id                     VARCHAR(128) NOT NULL,
     name                        VARCHAR(256) NOT NULL,
-    store_service_status        BOOLEAN NOT NULL,      -- offline, online
-    city_id                     VARCHAR(128) NOT NULL,
+    store_status                BOOLEAN NOT NULL,      -- offline, online
+    hero_url                    VARCHAR(1024) NOT NULL,
+    price_bucket                VARCHAR(7) NOT NULL DEFAULT "$",
     -- TODO
-    location_lat                DOUBLE NULL,
-    location_lng                DOUBLE NULL,
+    city_id                     VARCHAR(128) NOT NULL,
+    -- 
     address                     VARCHAR(256) NULL,
     address_2                   VARCHAR(256) NULL,
     postal_code                 VARCHAR(256) NULL,  
     contact_emails              VARCHAR(512) NULL,
+    longitude                   DOUBLE NULL,
+    latitute                    DOUBLE NULL,
+    -- 
     offline_reason              VARCHAR(128) NULL,      -- OUT_OF_MENU_HOURS, INVISIBLE, PAUSED_BY_OUR_APP, PAUSED_BY_STORE
     external_store_id           VARCHAR(128) NULL,
     -- 
@@ -26,17 +30,17 @@ CREATE TABLE IF NOT EXISTS store (
 
 -- Market @@ <-----> @@ Store
 CREATE TABLE IF NOT EXISTS market (
-    market_id           VARCHAR(128) NOT NULL,
+    market_id                   VARCHAR(128) NOT NULL,
     -- 
-    name                VARCHAR(128) NOT NULL,
+    name                        VARCHAR(128) NOT NULL,
     -- TODO
     -- 
     PRIMARY KEY (market_id)
 );
 
 CREATE TABLE IF NOT EXISTS market_stores (
-    market_id           VARCHAR(128) NOT NULL,
-    store_id            VARCHAR(128) NOT NULL,
+    market_id                   VARCHAR(128) NOT NULL,
+    store_id                    VARCHAR(128) NOT NULL,
     -- 
     -- FOREIGN KEY (market_id)
     -- FOREIGN KEY (store_id)
@@ -61,3 +65,4 @@ CREATE TABLE IF NOT EXISTS store_stats (
     -- 
     PRIMARY KEY (store_id)
 );
+

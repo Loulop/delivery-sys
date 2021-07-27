@@ -20,4 +20,4 @@ mysql.init: mysql.delete mysql.create
 	@cat ./db_schemas/*.sql | mysql -h localhost -u root $(MYSQL_DB_NAME);
 
 mysql.lint:
-	@sqlfluff lint --exclude-rules L039,L016,L029,L003,
+	@sqlfluff lint --exclude-rules L039,L016,L029,L003;

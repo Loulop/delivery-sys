@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS item (
     is_parent_item      BOOLEAN NOT NULL DEFAULT 1,       -- parent, null
     item_status         VARCHAR(16) NOT NULL DEFAULT 'IN_STOCK',     -- out_of_stock, in_stock, back_in_stock
     -- TODO
+    image_url           VARCHAR(1024) NULL,
     ingreidents         VARCHAR(2048) NULL,
     available_from      TIME NULL,
     available_to        TIME NULL,
@@ -87,6 +88,7 @@ CREATE TABLE IF NOT EXISTS menu (
     menu_status         BOOLEAN NOT NULL,       -- visible, invisible
     fulfillment_type    VARCHAR(16) NOT NULL DEFAULT "DELIVERY",      -- delivery, pick-up, all
     -- TODO
+    description         VARCHAR(128) NULL,
     -- 
     store_id            VARCHAR(128) NULL,
     -- 
@@ -103,21 +105,28 @@ CREATE TABLE IF NOT EXISTS menu_categories (
     INDEX (menu_id)
 );
 
--- Service hours @@ <-----> 1 Store
--- update this table as a cronjob
-CREATE TABLE IF NOT EXISTS holiday_service_hours (
-    service_hours_id            VARCHAR(128) NOT NULL,
+-- Service availability @@ <-----> @@ Menu
+-- update this table from a cron object
+-- a group of schedules by name is a cron object
+CREATE TABLE IF NOT EXISTS service_availability (
+    service_availability_id         VARCHAR(128) NOT NULL,
     -- 
-    menu_id                     VARCHAR(128) NOT NULL,
-    store_id                    VARCHAR(128) NOT NULL,
-    name                        VARCHAR(128) NOT NULL,
-    service_hours_status        BOOLEAN NOT NULL,
-    service_date                DATE NOT NULL,
-    service_time_from           TIME NOT NULL,
-    service_time_to             TIME NOT NULL,
+    store_id                        VARCHAR(128) NOT NULL,
+    name                            VARCHAR(128) NOT NULL,
+    service_availability_status     BOOLEAN NOT NULL,
+    service_date                    DATE NOT NULL,
+    service_time_from               TIME NOT NULL,
+    service_time_to                 TIME NOT NULL,
     -- 
-    PRIMARY KEY (service_hours_id),
-    -- FOREIGN KEY (menu_id),
+    PRIMARY KEY (service_availability_id),
     -- FOREIGN KEY (store_id),
     INDEX (store_id, name)
+);
+
+CREATE TABLE IF NOT EXISTS menu_service_availability (
+    menu_id                         VARCHAR(128) NOT NULL,
+    service_availability_id         VARCHAR(128) NOT NULL,
+    -- 
+    INDEX (menu_id),
+    INDEX (service_availability_id)
 );

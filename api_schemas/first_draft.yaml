@@ -2,12 +2,21 @@
 # 1. https://developer.uber.com/docs/eats/api/v1/get-eats-stores-storeid
 # 2. https://developer.uber.com/docs/eats/api/v1/get-eats-stores
 # 3. https://developer.uber.com/docs/eats/api/v1/get-eats-store-storeid-status
+# 4. https://developer.uber.com/docs/eats/api/v1/get-eats-stores-storeid-holidayhours
+# 5. https://developer.uber.com/docs/eats/api/v1/post-eats-stores-storeid-holidayhours
 
 Store_API:
   GET:
     - /stores?limit={}&start_key={}               # list all stores
-    - /store/{store_id}                           # get store details
-    - /store/{store_id}/status                    # get store status  
+    - /stores/{store_id}                           # get store details
+    - /stores/{store_id}/status                    # get store status
 
   POST:
-    - /store/{store_id}/status                    # set store status 
+    - /stores/{store_id}/status                    # set store status
+
+Store_Menu_API:
+  GET:
+    - /stores/{store_id}/menus?menu_type={}        # list store menus
+
+  POST:
+
