@@ -1,22 +1,22 @@
--- request
-CREATE TABLE IF NOT EXISTS request (
+-- order
+CREATE TABLE IF NOT EXISTS `order` (
     -- primary key
-    request_id                          VARCHAR(128) NOT NULL,
+    order_id                            VARCHAR(128) NOT NULL,
     -- foreign key
     store_id                            VARCHAR(128) NOT NULL,
     -- 
     display_name                        VARCHAR(4) NOT NULL UNIQUE,
-    request_type                        VARCHAR(32) NOT NULL,       -- PICK_UP, DINE_IN, DELIVERY_BY_UBER, DELIVERY_BY_RESTAURANT
+    order_type                          VARCHAR(32) NOT NULL,       -- PICK_UP, DINE_IN, DELIVERY_BY_UBER, DELIVERY_BY_RESTAURANT
     current_status                      VARCHAR(32) NOT NULL,       -- CREATED, ACCEPTED, DENIED, FINISHED, CANCELED
     placed_at                           DATETIME NOT NULL,
     estimated_ready_for_pick_up         DATETIME NOT NULL,
     -- 
-    PRIMARY KEY (request_id)
+    PRIMARY KEY (order_id)
 );
 
 CREATE TABLE IF NOT EXISTS eater_info (
     -- primary key
-    request_id                          VARCHAR(128) NOT NULL,
+    order_id                            VARCHAR(128) NOT NULL,
     -- foreign key
     user_id                             VARCHAR(128) NOT NULL,
     -- 
@@ -29,35 +29,35 @@ CREATE TABLE IF NOT EXISTS eater_info (
     location_longitude                  DOUBLE NULL,
     location_google_place_id            VARCHAR(128) NULL,
     -- 
-    PRIMARY KEY (request_id)
+    PRIMARY KEY (order_id)
 );
 
--- request_cart
--- request cart contains:
+-- order_cart
+-- order cart contains:
 -- 1. list of items
         -- 1.1 list of modifier_groups
 -- 2. fulfillment issues list
 -- 3. payment
--- 4. request requested time
+-- 4. order ordered time
 -- 5. estimated pickup time
--- 6. request type ---
-CREATE TABLE IF NOT EXISTS request_cart (
+-- 6. order type ---
+CREATE TABLE IF NOT EXISTS order_cart (
     -- primary key
-    request_id                          VARCHAR(128) NOT NULL,
+    order_id                            VARCHAR(128) NOT NULL,
     -- 
-    PRIMARY KEY (request_id)
+    PRIMARY KEY (order_id)
 );
 
-CREATE TABLE IF NOT EXISTS request_payment (
+CREATE TABLE IF NOT EXISTS order_payment (
     -- primary key
-    request_id                          VARCHAR(128) NOT NULL,
+    order_id                            VARCHAR(128) NOT NULL,
     -- 
-    PRIMARY KEY (request_id)
+    PRIMARY KEY (order_id)
 );
 
-CREATE TABLE IF NOT EXISTS request_packaging (
+CREATE TABLE IF NOT EXISTS order_packaging (
     -- primary key
-    request_id                          VARCHAR(128) NOT NULL,
+    order_id                            VARCHAR(128) NOT NULL,
     -- 
-    PRIMARY KEY (request_id)
+    PRIMARY KEY (order_id)
 );
