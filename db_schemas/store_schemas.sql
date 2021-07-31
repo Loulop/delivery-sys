@@ -45,3 +45,28 @@ CREATE TABLE IF NOT EXISTS store_stats (
     -- 
     PRIMARY KEY (store_id)
 );
+
+-- Report types
+-- PAYMENT_DETAILS_REPORT
+-- ORDER_ERRORS_MENU_ITEM_REPORT
+-- ORDER_ERRORS_TRANSACTION_REPORT
+-- ORDER_HISTORY_REPORT
+-- DOWNTIME_REPORT
+-- CUSTOMER_AND_DELIVERY_FEEDBACK_REPORT
+-- MENU_ITEM_FEEDBACK_REPORT
+
+CREATE TABLE IF NOT EXISTS store_report (
+    -- primary key
+    report_id                       VARCHAR(128) NOT NULL,
+    -- foreign key
+    user_id                         VARCHAR(128) NOT NULL,
+    store_id                        VARCHAR(128) NOT NULL,
+    report_type                     VARCHAR(128) NOT NULL,
+    -- 
+    current_status                  VARCHAR(32) NOT NULL,   -- CREATED, ACCEPTED, DENIED, FINISHED, CANCELED
+    start_date                      DATETIME NOT NULL,
+    end_date                        DATETIME NOT NULL,
+    placed_at                       DATETIME NOT NULL,
+    -- 
+    PRIMARY KEY (report_id)
+);
